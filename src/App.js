@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
+import PlayerInfo from './PlayerInfo';
 
 function App() {
   const [showResult, setShowResult] = useState(false);
   const [apiMessage, setApiMessage] = useState("");
+  const [playerId, setPlayerId] = useState("");
+  const [playerDate, setPlayerDate] = useState("");
 
   const helloWorld = async () => {
 
@@ -37,16 +40,16 @@ function App() {
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
     const fullName = `${encodeURIComponent(firstName)}%20${encodeURIComponent(lastName)}`;
-  
+
     console.log(process.env.REACT_APP_ENDPOINT);
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players/${fullName}`, {
       mode: 'cors'
     });
-  
+
     const responseData = await response.text();
     const parsedData = JSON.parse(responseData);
     console.log(parsedData);
-  
+
     setShowResult(true);
     setApiMessage(parsedData);
   };
@@ -112,6 +115,11 @@ function App() {
             placeholder="Last Name"
           />
           <button onClick={getPlayer}>Call Get Player</button>
+        </div>
+        <div>
+          {showResult && apiMessage.map((player, index) => (
+            <PlayerInfo key={index} playerData={player} />
+          ))}
         </div>
         <button onClick={listPlayers}>Call List Players</button>
         <button onClick={updatePlayer}>Call Update Player</button>
