@@ -5,8 +5,6 @@ import PlayerInfo from './PlayerInfo';
 function App() {
   const [showResult, setShowResult] = useState(false);
   const [apiMessage, setApiMessage] = useState("");
-  const [playerId, setPlayerId] = useState("");
-  const [playerDate, setPlayerDate] = useState("");
 
   const helloWorld = async () => {
 
