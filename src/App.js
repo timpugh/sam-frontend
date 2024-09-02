@@ -122,9 +122,6 @@ function App() {
         <button onClick={listPlayers}>Call List Players</button>
         <button onClick={updatePlayer}>Call Update Player</button>
         <button onClick={deletePlayer}>Call Delete Player</button>
-        <div>
-          {showResult && <code>{JSON.stringify(apiMessage, null, 2)}</code>}
-        </div>
       </header>
     </div>
   );
