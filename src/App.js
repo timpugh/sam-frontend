@@ -11,12 +11,12 @@ function App() {
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}hello`, {
       mode: 'cors'
     });
-    
+
     const responseData = await response.text();
     console.log(responseData)
 
     setShowResult(true);
-    setApiMessage(responseData);  
+    setApiMessage(responseData);
   };
 
   const createPlayer = async () => {
@@ -25,26 +25,29 @@ function App() {
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players`, {
       mode: 'cors'
     });
-    
+
     const responseData = await response.text();
     console.log(responseData)
 
     setShowResult(true);
-    setApiMessage(responseData);  
+    setApiMessage(responseData);
   };
 
   const getPlayer = async () => {
-
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const fullName = `${encodeURIComponent(firstName)}%20${encodeURIComponent(lastName)}`;
+  
     console.log(process.env.REACT_APP_ENDPOINT);
-    const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players/{id}`, {
+    const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players/${fullName}`, {
       mode: 'cors'
     });
-    
+  
     const responseData = await response.text();
     console.log(responseData)
-
+  
     setShowResult(true);
-    setApiMessage(responseData);  
+    setApiMessage(responseData);
   };
 
   const listPlayers = async () => {
@@ -53,12 +56,12 @@ function App() {
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players`, {
       mode: 'cors'
     });
-    
+
     const responseData = await response.text();
     console.log(responseData)
 
     setShowResult(true);
-    setApiMessage(responseData);  
+    setApiMessage(responseData);
   };
 
   const updatePlayer = async () => {
@@ -67,12 +70,12 @@ function App() {
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players/{id}/{date}`, {
       mode: 'cors'
     });
-    
+
     const responseData = await response.text();
     console.log(responseData)
 
     setShowResult(true);
-    setApiMessage(responseData);  
+    setApiMessage(responseData);
   };
 
   const deletePlayer = async () => {
@@ -81,12 +84,12 @@ function App() {
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players/{id}/{date}`, {
       mode: 'cors'
     });
-    
+
     const responseData = await response.text();
     console.log(responseData)
 
     setShowResult(true);
-    setApiMessage(responseData);  
+    setApiMessage(responseData);
   };
 
 
@@ -96,7 +99,19 @@ function App() {
         <h1>CALL AN API</h1>
         <button onClick={helloWorld}>Call Hello World</button>
         <button onClick={createPlayer}>Call Create Player</button>
-        <button onClick={getPlayer}>Call Get Player</button>
+        <div>
+          <input
+            type="text"
+            id="firstName"
+            placeholder="First Name"
+          />
+          <input
+            type="text"
+            id="lastName"
+            placeholder="Last Name"
+          />
+          <button onClick={getPlayer}>Call Get Player</button>
+        </div>
         <button onClick={listPlayers}>Call List Players</button>
         <button onClick={updatePlayer}>Call Update Player</button>
         <button onClick={deletePlayer}>Call Delete Player</button>
