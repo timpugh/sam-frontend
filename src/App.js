@@ -44,10 +44,11 @@ function App() {
     });
   
     const responseData = await response.text();
-    console.log(responseData)
+    const parsedData = JSON.parse(responseData);
+    console.log(parsedData);
   
     setShowResult(true);
-    setApiMessage(responseData);
+    setApiMessage(parsedData);
   };
 
   const listPlayers = async () => {
