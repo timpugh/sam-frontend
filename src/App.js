@@ -1,43 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import PlayerInfo from './PlayerInfo';
 
 function App() {
   const [showResult, setShowResult] = useState(false);
   const [apiMessage, setApiMessage] = useState("");
-  const [createPlayerData, setCreatePlayerData] = useState(`{
-    "player": {
-        "player_name": "George Costanza",
-        "season": "2002-03",
-        "age": "25",
-        "ast": "2.2",
-        "ast_pct": "1.231",
-        "college": "Syracuse",
-        "country": "USA",
-        "draft_number": "49",
-        "draft_round": "2",
-        "draft_year": "2000",
-        "dreb_pct": "1.123",
-        "gp": "11",
-        "net_rating": "6",
-        "oreb_pct": "1.058",
-        "player_height": "188.96",
-        "player_weight": "83.100152",
-        "pts": "3.6",
-        "reb": "2.3",
-        "team_abbreviation": "SAS",
-        "ts_pct": "1.601",
-        "usg_pct": "1.161"
-    }
-}`);
-  const textareaCreatePlayerRef  = useRef(null);
-  useEffect(() => {
-    const textarea = textareaCreatePlayerRef.current;
-    if (textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = `${textarea.scrollHeight}px`;
-    }
-  }, []);
 
   const helloWorld = async () => {
 
@@ -57,11 +24,6 @@ function App() {
 
     console.log(process.env.REACT_APP_ENDPOINT);
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: createPlayerData,
       mode: 'cors'
     });
 
@@ -138,16 +100,7 @@ function App() {
       <header className="App-header">
         <h1>CALL AN API</h1>
         <button onClick={helloWorld}>Call Hello World</button>
-        <div>
-          <textarea
-            value={createPlayerData}
-            onChange={(e) => setCreatePlayerData(e.target.value)}
-            rows={1}
-            style={{ resize: 'vertical', color: createPlayerData.startsWith('{') ? 'gray' : 'inherit' }}
-            ref={textareaCreatePlayerRef}
-          />
-          <button onClick={createPlayer}>Call Create Player</button>
-        </div>
+        <button onClick={createPlayer}>Call Create Player</button>
         <div>
           <input
             type="text"
