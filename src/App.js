@@ -5,7 +5,7 @@ import PlayerInfo from './PlayerInfo';
 function App() {
   const [showResult, setShowResult] = useState(false);
   const [apiMessage, setApiMessage] = useState("");
-  const [playerData, setPlayerData] = useState(`{
+  const [createPlayerData, setCreatePlayerData] = useState(`{
     "player": {
         "player_name": "George Costanza",
         "season": "2002-03",
@@ -30,10 +30,9 @@ function App() {
         "usg_pct": "1.161"
     }
 }`);
-  const textareaRef = useRef(null);
-
+  const textareaCreatePlayerRef  = useRef(null);
   useEffect(() => {
-    const textarea = textareaRef.current;
+    const textarea = textareaCreatePlayerRef.current;
     if (textarea) {
       textarea.style.height = 'auto';
       textarea.style.height = `${textarea.scrollHeight}px`;
@@ -62,7 +61,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(playerData),
+      body: createPlayerData,
       mode: 'cors'
     });
 
@@ -141,11 +140,11 @@ function App() {
         <button onClick={helloWorld}>Call Hello World</button>
         <div>
           <textarea
-            value={playerData}
-            onChange={(e) => setPlayerData(e.target.value)}
+            value={createPlayerData}
+            onChange={(e) => setCreatePlayerData(e.target.value)}
             rows={1}
-            style={{ resize: 'vertical', color: playerData.startsWith('{') ? 'gray' : 'inherit' }}
-            ref={textareaRef}
+            style={{ resize: 'vertical', color: createPlayerData.startsWith('{') ? 'gray' : 'inherit' }}
+            ref={textareaCreatePlayerRef}
           />
           <button onClick={createPlayer}>Call Create Player</button>
         </div>
