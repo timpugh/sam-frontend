@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+import { Amplify } from 'aws-amplify';
+
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import config from './amplifyconfiguration.json';
+Amplify.configure(config);
+
+
+
+function App(signOut, user) {
   const [showResult, setShowResult] = useState(false);
   const [apiMessage, setApiMessage] = useState("");
 
@@ -96,6 +105,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Hello {user.username}</h1>
+        <button onClick={signOut}>Sign out</button>
         <h1>CALL AN API</h1>
         <button onClick={helloWorld}>Call Hello World</button>
         <button onClick={createPlayer}>Call Create Player</button>
@@ -123,4 +134,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
