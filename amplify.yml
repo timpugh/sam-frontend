@@ -8,6 +8,8 @@ frontend:
       commands:
         - echo "REACT_APP_REGION=$REGION" >> .env 
         - echo "REACT_APP_ENDPOINT=$ENDPOINT" >> .env
+        - '# Execute Amplify CLI with the helper script'
+        - amplifyPush --simple
         - npm run build
   artifacts:
     baseDirectory: build
