@@ -8,7 +8,7 @@ import '@aws-amplify/ui-react/styles.css';
 import config from './amplifyconfiguration.json';
 Amplify.configure(config);
 
-
+//test
 
 function App(signOut, user) {
   const [showResult, setShowResult] = useState(false);
