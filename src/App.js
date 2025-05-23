@@ -10,7 +10,7 @@ Amplify.configure(config);
 
 //test
 
-function App(signOut, user) {
+function App({signOut, user}) {
   const [showResult, setShowResult] = useState(false);
   const [apiMessage, setApiMessage] = useState("");
 
