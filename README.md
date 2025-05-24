@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Be sure to add a .env file and fill in the placeholders with your information for local development:
+
+```
+REACT_APP_REGION=<region>
+REACT_APP_ENDPOINT=https://<api_id>.execute-api.<region>.amazonaws.com/<stage>/
+REACT_APP_SKIP_AUTH=true
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
