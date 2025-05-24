@@ -3,6 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
+        - npm install
         - npm ci
         - npm audit fix --force || true
     build:
