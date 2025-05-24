@@ -8,7 +8,8 @@ import '@aws-amplify/ui-react/styles.css';
 import config from './amplifyconfiguration.json';
 Amplify.configure(config);
 
-function App({signOut, user}) {
+// The main app component without authentication wrapper
+function AppComponent({signOut, user}) {
   const [showResult, setShowResult] = useState(false);
   const [apiMessage, setApiMessage] = useState("");
 
@@ -103,8 +104,8 @@ function App({signOut, user}) {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Hello {user.username}</h1>
-        <button onClick={signOut}>Sign out</button>
+        <h1>Hello {process.env.REACT_APP_SKIP_AUTH === 'true' ? 'LOCAL_DEVELOPER' : user.username}</h1>
+        <button onClick={signOut || (() => console.log('Sign out not available in local dev'))}>Sign out</button>
         <h1>CALL AN API</h1>
         <button onClick={helloWorld}>Call Hello World</button>
         <button onClick={createPlayer}>Call Create Player</button>
@@ -132,4 +133,12 @@ function App({signOut, user}) {
   );
 }
 
-export default withAuthenticator(App);
+// Conditionally apply the authenticator based on environment variable
+let App;
+if (process.env.REACT_APP_SKIP_AUTH === 'true') {
+  App = AppComponent;
+} else {
+  App = withAuthenticator(AppComponent);
+}
+
+export default App;
