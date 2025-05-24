@@ -14,7 +14,6 @@ function AppComponent({signOut, user}) {
   const [apiMessage, setApiMessage] = useState("");
 
   const helloWorld = async () => {
-
     console.log(process.env.REACT_APP_ENDPOINT);
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}hello`, {
       mode: 'cors'
@@ -28,7 +27,6 @@ function AppComponent({signOut, user}) {
   };
 
   const createPlayer = async () => {
-
     console.log(process.env.REACT_APP_ENDPOINT);
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players`, {
       mode: 'cors'
@@ -59,7 +57,6 @@ function AppComponent({signOut, user}) {
   };
 
   const listPlayers = async () => {
-
     console.log(process.env.REACT_APP_ENDPOINT);
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players`, {
       mode: 'cors'
@@ -73,7 +70,6 @@ function AppComponent({signOut, user}) {
   };
 
   const updatePlayer = async () => {
-
     console.log(process.env.REACT_APP_ENDPOINT);
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players/{id}/{date}`, {
       mode: 'cors'
@@ -87,7 +83,6 @@ function AppComponent({signOut, user}) {
   };
 
   const deletePlayer = async () => {
-
     console.log(process.env.REACT_APP_ENDPOINT);
     const response = await fetch(`${process.env.REACT_APP_ENDPOINT}players/{id}/{date}`, {
       mode: 'cors'
@@ -100,35 +95,69 @@ function AppComponent({signOut, user}) {
     setApiMessage(responseData);
   };
 
+  const username = process.env.REACT_APP_SKIP_AUTH === 'true' ? 'LOCAL_DEVELOPER' : user.username;
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Hello {process.env.REACT_APP_SKIP_AUTH === 'true' ? 'LOCAL_DEVELOPER' : user.username}</h1>
-        <button onClick={signOut || (() => console.log('Sign out not available in local dev'))}>Sign out</button>
-        <h1>CALL AN API</h1>
-        <button onClick={helloWorld}>Call Hello World</button>
-        <button onClick={createPlayer}>Call Create Player</button>
-        <div>
-          <input
-            type="text"
-            id="firstName"
-            placeholder="First Name"
-          />
-          <input
-            type="text"
-            id="lastName"
-            placeholder="Last Name"
-          />
-          <button onClick={getPlayer}>Call Get Player</button>
+      {/* Apple-style navigation bar */}
+      <nav className="nav-bar">
+        <div className="nav-container">
+          <div className="nav-logo">Player App</div>
+          <div className="nav-menu">
+            <span className="nav-item">Home</span>
+            <span className="nav-item">Players</span>
+            <span className="nav-item">Stats</span>
+            <span className="nav-item">About</span>
+          </div>
+          <div className="user-info">
+            <button 
+              className="sign-out-button" 
+              onClick={signOut || (() => console.log('Sign out not available in local dev'))}
+            >
+              Sign out
+            </button>
+          </div>
         </div>
-        <button onClick={listPlayers}>Call List Players</button>
-        <button onClick={updatePlayer}>Call Update Player</button>
-        <button onClick={deletePlayer}>Call Delete Player</button>
-        <div>
-          {showResult && <code>{JSON.stringify(apiMessage, null, 2)}</code>}
+      </nav>
+
+      {/* Main content area */}
+      <div className="main-content">
+        <div className="hero-section">
+          <h1 className="hero-title">Player Management</h1>
+          <h2 className="hero-subtitle">Welcome, {username}</h2>
+          
+          <div className="action-buttons">
+            <button className="apple-button" onClick={helloWorld}>Hello World</button>
+            <button className="apple-button" onClick={createPlayer}>Create Player</button>
+            
+            <div className="input-group">
+              <input
+                type="text"
+                id="firstName"
+                placeholder="First Name"
+                className="apple-input"
+              />
+              <input
+                type="text"
+                id="lastName"
+                placeholder="Last Name"
+                className="apple-input"
+              />
+              <button className="apple-button" onClick={getPlayer}>Get Player</button>
+            </div>
+            
+            <button className="apple-button" onClick={listPlayers}>List Players</button>
+            <button className="apple-button" onClick={updatePlayer}>Update Player</button>
+            <button className="apple-button" onClick={deletePlayer}>Delete Player</button>
+          </div>
+          
+          {showResult && (
+            <div className="results-container">
+              <pre className="results-code">{JSON.stringify(apiMessage, null, 2)}</pre>
+            </div>
+          )}
         </div>
-      </header>
+      </div>
     </div>
   );
 }
