@@ -8,11 +8,11 @@
     "@testing-library/react": "latest",
     "@testing-library/user-event": "latest",
     "aws-amplify": "latest",
-    "dotenv": "^8.2.0",
-    "dotenv-expand": "^5.1.0",
+    "dotenv": "latest",
+    "dotenv-expand": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-scripts": "latest",
+    "react-scripts": "^5.0.1",
     "web-vitals": "latest"
   },
   "scripts": {

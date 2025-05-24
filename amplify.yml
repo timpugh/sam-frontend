@@ -4,6 +4,7 @@ frontend:
     preBuild:
       commands:
         - npm ci
+        - npm audit fix --force || true
     build:
       commands:
         - echo "REACT_APP_REGION=$REGION" >> .env 
